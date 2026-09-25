@@ -1,9 +1,0 @@
-{
-  "name": "swapnas-resinart",
-  "version": "1.0.0",
-  "private": true,
-  "description": "Swapna's Resinart storefront and backend",
-  "scripts": {
-    "start": "node server.js"
-  }
-}
