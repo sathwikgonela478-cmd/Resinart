@@ -1,0 +1,1960 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Swapna's Resinart | Handmade pieces with a little magic</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #17211e;
+        --muted: #66716d;
+        --cream: #faf7f0;
+        --paper: #fffdf9;
+        --sage: #dce7de;
+        --teal: #226b64;
+        --coral: #e27962;
+        --line: #e9e3d8;
+        --shadow: 0 20px 55px #1d322b1c;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--cream);
+        font-family: "DM Sans", sans-serif;
+      }
+      button,
+      input,
+      select {
+        font: inherit;
+      }
+      button {
+        cursor: pointer;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .top {
+        background: var(--ink);
+        color: #f8f5ec;
+        text-align: center;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        padding: 9px;
+      }
+      .nav {
+        height: 76px;
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 max(20px, calc((100% - 1180px) / 2));
+        position: sticky;
+        top: 0;
+        background: #faf7f0ed;
+        backdrop-filter: blur(12px);
+        z-index: 5;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .mark {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: var(--teal);
+        color: #fff;
+        font: 22px Georgia;
+        transform: rotate(-8deg);
+      }
+      .brand b {
+        font:
+          20px "Playfair Display",
+          serif;
+        line-height: 1;
+      }
+      .brand small {
+        display: block;
+        color: var(--coral);
+        font-size: 8px;
+        letter-spacing: 0.17em;
+        text-transform: uppercase;
+        margin-top: 5px;
+      }
+      .links {
+        display: flex;
+        gap: 29px;
+        color: #58645f;
+        font-size: 13px;
+      }
+      .links a:hover {
+        color: var(--coral);
+      }
+      .actions {
+        display: flex;
+        gap: 5px;
+      }
+      .icon {
+        position: relative;
+        border: 0;
+        background: none;
+        width: 39px;
+        height: 39px;
+        border-radius: 50%;
+        font-size: 19px;
+      }
+      .icon:hover {
+        background: var(--sage);
+      }
+      .count {
+        position: absolute;
+        right: 0;
+        top: 1px;
+        display: grid;
+        place-items: center;
+        background: var(--coral);
+        color: white;
+        width: 17px;
+        height: 17px;
+        border-radius: 50%;
+        font-size: 10px;
+      }
+      .hero {
+        max-width: 1180px;
+        margin: auto;
+        padding: 68px 22px 82px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 58px;
+        align-items: center;
+      }
+      .eyebrow {
+        color: var(--coral);
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        font-size: 10px;
+        font-weight: 700;
+        margin: 0 0 15px;
+      }
+      .hero h1 {
+        font:
+          600 clamp(44px, 6vw, 73px)/1.02 "Playfair Display",
+          serif;
+        max-width: 590px;
+        margin: 0;
+      }
+      .hero p:not(.eyebrow) {
+        color: var(--muted);
+        line-height: 1.75;
+        max-width: 450px;
+        margin: 23px 0 28px;
+        font-size: 15px;
+      }
+      .btn {
+        border: 0;
+        border-radius: 3px;
+        padding: 14px 21px;
+        font-size: 12px;
+        font-weight: 700;
+        display: inline-flex;
+        gap: 9px;
+        align-items: center;
+        justify-content: center;
+      }
+      .primary {
+        color: #fff;
+        background: var(--teal);
+      }
+      .primary:hover {
+        background: #174f4a;
+      }
+      .outline {
+        color: var(--ink);
+        background: transparent;
+        border: 1px solid #bdc9c0;
+      }
+      .hero-img {
+        position: relative;
+      }
+      .hero-img img {
+        width: 80%;
+        height: 420px;
+        object-fit: cover;
+        margin-left: auto;
+        display: block;
+        border-radius: 150px 150px 12px 12px;
+        box-shadow: var(--shadow);
+      }
+      .note {
+        position: absolute;
+        left: 0;
+        bottom: 25px;
+        background: var(--paper);
+        padding: 17px;
+        width: 185px;
+        box-shadow: var(--shadow);
+      }
+      .note b {
+        display: block;
+        font:
+          18px "Playfair Display",
+          serif;
+      }
+      .note span {
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.4;
+      }
+      .section {
+        max-width: 1180px;
+        margin: auto;
+        padding: 15px 22px 82px;
+      }
+      .head {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 20px;
+        margin-bottom: 25px;
+      }
+      .head h2,
+      .story h2 {
+        font:
+          600 38px "Playfair Display",
+          serif;
+        margin: 0;
+      }
+      .sub {
+        color: var(--muted);
+        font-size: 13px;
+        margin: 8px 0 0;
+      }
+      .filters {
+        display: flex;
+        gap: 7px;
+        flex-wrap: wrap;
+      }
+      .filter {
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 9px 14px;
+        background: none;
+        color: var(--muted);
+        font-size: 11px;
+      }
+      .filter.active,
+      .filter:hover {
+        background: var(--ink);
+        border-color: var(--ink);
+        color: #fff;
+      }
+      .products {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+      }
+      .card {
+        background: var(--paper);
+        animation: up 0.45s both;
+      }
+      .card-img {
+        aspect-ratio: 1/1.05;
+        position: relative;
+        overflow: hidden;
+        background: var(--sage);
+      }
+      .card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+      }
+      .card:hover img {
+        transform: scale(1.05);
+      }
+      .tag {
+        position: absolute;
+        top: 11px;
+        left: 11px;
+        padding: 6px 8px;
+        background: #fffaf1;
+        color: var(--coral);
+        font-size: 9px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .info {
+        padding: 14px 14px 16px;
+      }
+      .info h3 {
+        font:
+          600 18px "Playfair Display",
+          serif;
+        margin: 0;
+      }
+      .info p {
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.45;
+        min-height: 32px;
+        margin: 7px 0 13px;
+      }
+      .bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .price {
+        font-weight: bold;
+        font-size: 14px;
+      }
+      .add {
+        border: 1px solid var(--teal);
+        color: var(--teal);
+        background: none;
+        padding: 8px 10px;
+        font-size: 10px;
+        font-weight: bold;
+      }
+      .add:hover {
+        background: var(--teal);
+        color: #fff;
+      }
+      .story {
+        background: var(--sage);
+        padding: 74px 22px;
+      }
+      .story-inner {
+        max-width: 900px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: 0.8fr 1.2fr;
+        align-items: center;
+        gap: 70px;
+      }
+      .story img {
+        width: 220px;
+        height: 260px;
+        object-fit: cover;
+        border-radius: 110px 110px 6px 6px;
+        margin: auto;
+      }
+      .story h2 {
+        font-size: 41px;
+      }
+      .story p:not(.eyebrow) {
+        color: #53635c;
+        font-size: 13px;
+        line-height: 1.8;
+      }
+      .promises {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+      .promises div {
+        text-align: center;
+        padding: 32px 20px;
+        border-right: 1px solid var(--line);
+      }
+      .promises div:last-child {
+        border: 0;
+      }
+      .promises b {
+        display: block;
+        font:
+          18px "Playfair Display",
+          serif;
+        margin: 8px;
+      }
+      .promises span {
+        font-size: 11px;
+        color: var(--muted);
+      }
+      footer {
+        background: var(--ink);
+        color: #fff;
+        padding: 34px;
+        text-align: center;
+      }
+      footer .brand {
+        justify-content: center;
+        margin-bottom: 12px;
+      }
+      footer .mark {
+        background: var(--coral);
+      }
+      footer small {
+        color: #aebbb2;
+        font-size: 11px;
+      }
+      .shade {
+        position: fixed;
+        inset: 0;
+        background: #0f19154d;
+        z-index: 9;
+        opacity: 0;
+        pointer-events: none;
+        transition: 0.25s;
+      }
+      .shade.open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .drawer {
+        position: fixed;
+        z-index: 10;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: min(430px, 100%);
+        background: var(--paper);
+        padding: 27px;
+        transform: translateX(100%);
+        transition: 0.3s;
+        overflow: auto;
+      }
+      .drawer.open {
+        transform: none;
+      }
+      .drawer-head,
+      .modal-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 18px;
+      }
+      .drawer h2,
+      .modal h2 {
+        font:
+          600 29px "Playfair Display",
+          serif;
+        margin: 0;
+      }
+      .close {
+        border: 0;
+        background: none;
+        color: var(--muted);
+        font-size: 27px;
+      }
+      .cart-row {
+        display: grid;
+        grid-template-columns: 62px 1fr auto;
+        gap: 11px;
+        align-items: center;
+        padding: 16px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .cart-row img {
+        width: 62px;
+        height: 62px;
+        object-fit: cover;
+      }
+      .cart-row h3 {
+        font:
+          16px "Playfair Display",
+          serif;
+        margin: 0;
+      }
+      .cart-row p {
+        color: var(--muted);
+        font-size: 11px;
+        margin: 4px 0;
+      }
+      .qty {
+        display: flex;
+        gap: 7px;
+        align-items: center;
+      }
+      .qty button {
+        width: 21px;
+        height: 21px;
+        border: 1px solid var(--line);
+        background: none;
+      }
+      .remove {
+        border: 0;
+        background: none;
+        color: var(--coral);
+        font-size: 10px;
+      }
+      .empty {
+        text-align: center;
+        padding: 60px 10px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .cart-foot {
+        border-top: 1px solid var(--line);
+        margin-top: 14px;
+        padding-top: 17px;
+      }
+      .total {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        font-weight: bold;
+      }
+      .full {
+        width: 100%;
+      }
+      .tip {
+        color: var(--muted);
+        font-size: 10px;
+        line-height: 1.5;
+      }
+      .modal {
+        position: fixed;
+        inset: 0;
+        z-index: 12;
+        display: grid;
+        place-items: center;
+        padding: 20px;
+        opacity: 0;
+        pointer-events: none;
+        transition: 0.2s;
+      }
+      .modal.open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .modal-box {
+        width: min(850px, 100%);
+        max-height: 90vh;
+        overflow: auto;
+        background: var(--paper);
+        padding: 28px;
+        box-shadow: var(--shadow);
+      }
+      .login {
+        max-width: 390px;
+        margin: auto;
+        padding: 25px 4px;
+      }
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin: 12px 0;
+      }
+      .field label {
+        font-size: 11px;
+        font-weight: bold;
+      }
+      .field input,
+      .field select {
+        border: 1px solid var(--line);
+        padding: 10px;
+        background: #fff;
+        outline: 0;
+      }
+      .admin-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      .admin-list {
+        border-top: 1px solid var(--line);
+        margin-top: 20px;
+      }
+      .admin-row {
+        display: grid;
+        grid-template-columns: 52px 1fr auto;
+        gap: 11px;
+        align-items: center;
+        padding: 11px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .admin-row img {
+        width: 52px;
+        height: 52px;
+        object-fit: cover;
+      }
+      .admin-row b {
+        display: block;
+        font-size: 13px;
+      }
+      .admin-row span {
+        color: var(--muted);
+        font-size: 11px;
+      }
+      .admin-row button {
+        border: 0;
+        background: none;
+        color: var(--coral);
+        font-size: 11px;
+      }
+      .toast {
+        position: fixed;
+        z-index: 20;
+        bottom: 20px;
+        left: 50%;
+        transform: translate(-50%, 20px);
+        opacity: 0;
+        background: var(--ink);
+        color: #fff;
+        padding: 12px 18px;
+        font-size: 11px;
+        transition: 0.25s;
+      }
+      .toast.show {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+      @keyframes up {
+        from {
+          opacity: 0;
+          transform: translateY(9px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      @media (max-width: 800px) {
+        .links {
+          display: none;
+        }
+        .hero {
+          grid-template-columns: 1fr;
+          padding-top: 45px;
+        }
+        .hero-img img {
+          height: 330px;
+        }
+        .products {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .head {
+          display: block;
+        }
+        .filters {
+          margin-top: 17px;
+        }
+        .story-inner {
+          grid-template-columns: 1fr;
+          gap: 25px;
+          text-align: center;
+        }
+        .story img {
+          width: 175px;
+          height: 210px;
+        }
+        .promises {
+          grid-template-columns: 1fr;
+        }
+        .promises div {
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+      }
+      @media (max-width: 480px) {
+        .brand b {
+          font-size: 17px;
+        }
+        .hero {
+          padding-left: 17px;
+          padding-right: 17px;
+        }
+        .hero-img img {
+          height: 280px;
+        }
+        .note {
+          width: 155px;
+          padding: 13px;
+        }
+        .products {
+          gap: 9px;
+        }
+        .info {
+          padding: 11px 9px;
+        }
+        .info h3 {
+          font-size: 16px;
+        }
+        .add {
+          padding: 7px 6px;
+        }
+        .admin-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+    <style>
+      .icon svg {
+        width: 20px;
+        height: 20px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.7;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .cart-icon {
+        width: 44px;
+      }
+      .account-box {
+        width: min(470px, 100%);
+      }
+      .phone-entry {
+        display: grid;
+        grid-template-columns: minmax(170px, 1fr) 1fr;
+        gap: 8px;
+      }
+      .phone-entry select,
+      .phone-entry input {
+        min-width: 0;
+      }
+      .account-switch {
+        text-align: center;
+        color: var(--muted);
+        font-size: 12px;
+        margin-top: 18px;
+      }
+      .account-switch button {
+        border: 0;
+        background: none;
+        color: var(--teal);
+        font-weight: bold;
+      }
+      .account-welcome {
+        text-align: center;
+        padding: 20px 5px;
+      }
+      .account-welcome h3 {
+        font:
+          24px "Playfair Display",
+          serif;
+        margin: 8px 0;
+      }
+      .account-welcome p {
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.6;
+      }
+      .admin-page .modal-box {
+        border-top: 5px solid var(--ink);
+      }
+      .user-page .modal-box {
+        border-top: 5px solid var(--coral);
+      }
+      .admin-page .eyebrow {
+        color: var(--ink);
+      }
+      .user-page .eyebrow {
+        margin-bottom: 7px;
+      }
+    </style>
+    <style>
+      .order-page .modal-box {
+        width: min(650px, 100%);
+        border-top: 5px solid var(--teal);
+      }
+      .order-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0 14px;
+      }
+      .order-grid .wide {
+        grid-column: 1 / -1;
+      }
+      .required-note {
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.5;
+        margin: 8px 0 18px;
+      }
+      .field.invalid input {
+        border-color: var(--coral);
+        background: #fff8f5;
+      }
+      @media (max-width: 560px) {
+        .order-grid {
+          grid-template-columns: 1fr;
+        }
+        .order-grid .wide {
+          grid-column: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top">
+      HANDMADE WITH PATIENCE IN HYDERABAD &nbsp; | &nbsp; CUSTOM ORDERS WELCOME
+    </div>
+    <nav class="nav">
+      <a class="brand" href="#top"
+        ><i class="mark">S</i
+        ><span
+          ><b>Swapna's Resinart</b><small>made to keep forever</small></span
+        ></a
+      >
+      <div class="links">
+        <a href="#shop">Shop</a><a href="#story">Our story</a
+        ><a href="#contact">Contact</a>
+      </div>
+      <div class="actions">
+        <button
+          class="icon"
+          id="account"
+          title="Customer account"
+          aria-label="Customer account"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="8" r="3.5" />
+            <path d="M5 20c.8-3.2 3.1-5 7-5s6.2 1.8 7 5" />
+          </svg></button
+        ><button
+          class="icon cart-icon"
+          id="cart"
+          title="Shopping cart"
+          aria-label="Shopping cart"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M3 4h2l2.1 10.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L20 8H6"
+            />
+            <circle cx="10" cy="20" r="1" />
+            <circle cx="17" cy="20" r="1" /></svg
+          ><em class="count" id="count">0</em>
+        </button>
+      </div>
+    </nav>
+    <main id="top">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Little pieces of wonder</p>
+          <h1>Art that holds a moment.</h1>
+          <p>
+            Hand-poured resin keepsake pieces, made slowly and thoughtfully by
+            Swapna. Each one has its own little swirl, sparkle and story.
+          </p>
+          <a class="btn primary" href="#shop"
+            >Explore the collection <b>→</b></a
+          >
+        </div>
+        <div class="hero-img">
+          <img
+            src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=900&q=85"
+            alt="Handmade decorative art"
+          />
+          <div class="note">
+            <b>Made by hand</b
+            ><span
+              >Small variations are what make every piece uniquely yours.</span
+            >
+          </div>
+        </div>
+      </section>
+      <section class="section" id="shop">
+        <div class="head">
+          <div>
+            <p class="eyebrow">The collection</p>
+            <h2>Find your forever piece</h2>
+            <p class="sub">
+              Thoughtful gifts, pretty corners and everyday little luxuries.
+            </p>
+          </div>
+          <div class="filters">
+            <button class="filter active" data-filter="All">All pieces</button
+            ><button class="filter" data-filter="Home decor">Home decor</button
+            ><button class="filter" data-filter="Jewellery">Jewellery</button
+            ><button class="filter" data-filter="Gifts">Gifts</button>
+          </div>
+        </div>
+        <div class="products" id="products"></div>
+      </section>
+      <section class="story" id="story">
+        <div class="story-inner">
+          <img
+            src="https://images.unsplash.com/photo-1602523961358-f9f03dd557db?auto=format&fit=crop&w=600&q=85"
+            alt="Handmade work"
+          />
+          <div>
+            <p class="eyebrow">Hello, I am Swapna</p>
+            <h2>Made with a calm heart.</h2>
+            <p>
+              What started as a happy experiment at the dining table became a
+              small world of colour, texture and meaningful gifts. I pour every
+              piece myself, one layer at a time, so that it feels special when
+              it reaches your home.
+            </p>
+            <a
+              class="btn outline"
+              href="https://wa.me/919000430210"
+              target="_blank"
+              >Say hello on WhatsApp ↗</a
+            >
+          </div>
+        </div>
+      </section>
+      <div class="promises">
+        <div>
+          <span>✦</span><b>One of a kind</b
+          ><span>No two pours are ever exactly alike.</span>
+        </div>
+        <div>
+          <span>◌</span><b>Made to order</b
+          ><span>Custom colours and names are welcome.</span>
+        </div>
+        <div>
+          <span>♡</span><b>Easy to order</b
+          ><span>Just message us on WhatsApp.</span>
+        </div>
+      </div>
+    </main>
+    <footer id="contact">
+      <div class="brand">
+        <i class="mark">S</i
+        ><span
+          ><b>Swapna's Resinart</b><small>made to keep forever</small></span
+        >
+      </div>
+      <small
+        >Questions, custom ideas or order updates? WhatsApp +91 90004
+        30210</small
+      >
+    </footer>
+    <div class="shade" id="shade"></div>
+    <aside class="drawer" id="drawer">
+      <div class="drawer-head">
+        <h2>Your basket</h2>
+        <button class="close" id="closeCart">×</button>
+      </div>
+      <div id="cartItems"></div>
+      <div class="cart-foot" id="cartFoot" hidden>
+        <div class="total"><span>Subtotal</span><span id="total">₹0</span></div>
+        <button class="btn primary full" id="checkout">
+          Order on WhatsApp ↗
+        </button>
+        <p class="tip">
+          Your order message opens in WhatsApp. Swapna will confirm
+          availability, delivery and payment details with you.
+        </p>
+      </div>
+    </aside>
+    <section class="modal admin-page" id="modal">
+      <div class="modal-box">
+        <div class="modal-head">
+          <div>
+            <p class="eyebrow">Private workspace</p>
+            <h2>Studio admin</h2>
+          </div>
+          <button class="close" id="closeAdmin">×</button>
+        </div>
+        <div id="adminContent"></div>
+      </div>
+    </section>
+    <section class="modal user-page" id="accountModal">
+      <div class="modal-box account-box">
+        <div class="modal-head">
+          <div>
+            <p class="eyebrow">Your details</p>
+            <h2 id="accountTitle">Customer account</h2>
+          </div>
+          <button class="close" id="closeAccount">×</button>
+        </div>
+        <div id="accountContent"></div>
+      </div>
+    </section>
+    <section class="modal order-page" id="orderModal">
+      <div class="modal-box">
+        <div class="modal-head">
+          <div>
+            <p class="eyebrow">Almost there</p>
+            <h2>Delivery details</h2>
+          </div>
+          <button class="close" id="closeOrder">×</button>
+        </div>
+        <p class="required-note">
+          Every field is required so Swapna can confirm your order and delivery
+          correctly on WhatsApp.
+        </p>
+        <div class="order-grid">
+          <div class="field">
+            <label for="orderName">Full name *</label
+            ><input id="orderName" autocomplete="name" required />
+          </div>
+          <div class="field">
+            <label for="orderEmail">Email address *</label
+            ><input
+              id="orderEmail"
+              type="email"
+              autocomplete="email"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="orderPhone">WhatsApp number *</label
+            ><input
+              id="orderPhone"
+              type="tel"
+              autocomplete="tel"
+              placeholder="+919000430210"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="orderCountry">Country *</label
+            ><input id="orderCountry" autocomplete="country-name" required />
+          </div>
+          <div class="field wide">
+            <label for="orderAddress">Full delivery address *</label
+            ><input
+              id="orderAddress"
+              autocomplete="street-address"
+              placeholder="House / flat, street, area"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="orderCity">City *</label
+            ><input id="orderCity" autocomplete="address-level2" required />
+          </div>
+          <div class="field">
+            <label for="orderState">State / province *</label
+            ><input id="orderState" autocomplete="address-level1" required />
+          </div>
+          <div class="field">
+            <label for="orderPostal">Postal / ZIP code *</label
+            ><input id="orderPostal" autocomplete="postal-code" required />
+          </div>
+        </div>
+        <button class="btn primary full" id="confirmOrder">
+          Verify details and open WhatsApp ↗
+        </button>
+        <p class="tip">
+          Your details are used only to prepare this order message. Swapna will
+          confirm availability, shipping cost and payment with you.
+        </p>
+      </div>
+    </section>
+    <div class="toast" id="toast"></div>
+    <script>
+      const defaults = [
+        {
+          id: 1,
+          name: "Ocean Wave Coaster Set",
+          category: "Home decor",
+          price: 899,
+          tag: "Bestseller",
+          desc: "Four coasters with a soft blue wave and gold edge.",
+          image:
+            "https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=700&q=85",
+        },
+        {
+          id: 2,
+          name: "Sunset Trinket Tray",
+          category: "Home decor",
+          price: 749,
+          tag: "New",
+          desc: "A little tray for rings, keys and beautiful bits.",
+          image:
+            "https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=700&q=85",
+        },
+        {
+          id: 3,
+          name: "Petal Drop Earrings",
+          category: "Jewellery",
+          price: 499,
+          tag: "Handmade",
+          desc: "Light-catching floral drops for your everyday.",
+          image:
+            "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=700&q=85",
+        },
+        {
+          id: 4,
+          name: "Moonlit Blue Bookmark",
+          category: "Gifts",
+          price: 299,
+          tag: "Gift idea",
+          desc: "A thoughtful little gift for the reader in your life.",
+          image:
+            "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=700&q=85",
+        },
+        {
+          id: 5,
+          name: "Rose Gold Ring Dish",
+          category: "Home decor",
+          price: 399,
+          tag: "Handmade",
+          desc: "A tiny home for your favourite everyday jewellery.",
+          image:
+            "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=700&q=85",
+        },
+        {
+          id: 6,
+          name: "Pressed Flower Pendant",
+          category: "Jewellery",
+          price: 599,
+          tag: "One of a kind",
+          desc: "Real flowers held in a clear resin keepsake.",
+          image:
+            "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=700&q=85",
+        },
+        {
+          id: 7,
+          name: "Name Keychain",
+          category: "Gifts",
+          price: 349,
+          tag: "Customise me",
+          desc: "Add a name, initial or your favourite colour.",
+          image:
+            "https://images.unsplash.com/photo-1590736969955-71cc94901144?auto=format&fit=crop&w=700&q=85",
+        },
+        {
+          id: 8,
+          name: "Emerald Serving Board",
+          category: "Home decor",
+          price: 1499,
+          tag: "Statement piece",
+          desc: "A jewel-toned centrepiece for slow weekend hosting.",
+          image:
+            "https://images.unsplash.com/photo-1603199506016-b9a594b593c0?auto=format&fit=crop&w=700&q=85",
+        },
+      ];
+      let products =
+          JSON.parse(localStorage.getItem("swapna-products") || "null") ||
+          defaults,
+        cartData = JSON.parse(localStorage.getItem("swapna-cart") || "{}"),
+        filter = "All";
+      const cartKey = () =>
+        typeof currentUser !== "undefined" && currentUser
+          ? `swapna-cart-user-${currentUser.id}`
+          : "swapna-cart-guest";
+      const money = (n) => "₹" + Number(n).toLocaleString("en-IN");
+      const save = () => {
+        localStorage.setItem("swapna-products", JSON.stringify(products));
+        localStorage.setItem(cartKey(), JSON.stringify(cartData));
+      };
+      const say = (t) => {
+        toast.textContent = t;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 2200);
+      };
+      function render() {
+        productsEl.innerHTML = products
+          .filter((p) => filter === "All" || p.category === filter)
+          .map(
+            (p, i) =>
+              `<article class="card" style="animation-delay:${i * 40}ms"><div class="card-img"><img src="${p.image}" alt="${p.name}" loading="lazy"><span class="tag">${p.tag}</span></div><div class="info"><h3>${p.name}</h3><p>${p.desc}</p><div class="bottom"><span class="price">${money(p.price)}</span><button class="add" data-add="${p.id}">Add to basket</button></div></div></article>`,
+          )
+          .join("");
+        document.querySelectorAll("[data-add]").forEach(
+          (b) =>
+            (b.onclick = () => {
+              cartData[b.dataset.add] = (cartData[b.dataset.add] || 0) + 1;
+              save();
+              renderCart();
+              say("Added to your basket");
+            }),
+        );
+      }
+      function entries() {
+        return Object.entries(cartData)
+          .map(([id, qty]) => ({ p: products.find((x) => x.id === +id), qty }))
+          .filter((x) => x.p);
+      }
+      function renderCart() {
+        let es = entries();
+        count.textContent = es.reduce((n, x) => n + x.qty, 0);
+        if (!es.length) {
+          cartItems.innerHTML =
+            '<div class="empty">Your basket is waiting for something lovely.<br><br><a class="btn outline" href="#shop">Browse pieces</a></div>';
+          cartFoot.hidden = true;
+          return;
+        }
+        cartItems.innerHTML = es
+          .map(
+            (x) =>
+              `<div class="cart-row"><img src="${x.p.image}" alt="${x.p.name}"><div><h3>${x.p.name}</h3><p>${money(x.p.price)} each</p><div class="qty"><button data-dec="${x.p.id}">−</button><span>${x.qty}</span><button data-inc="${x.p.id}">+</button></div></div><div><b>${money(x.p.price * x.qty)}</b><br><button class="remove" data-remove="${x.p.id}">Remove</button></div></div>`,
+          )
+          .join("");
+        total.textContent = money(
+          es.reduce((n, x) => n + x.p.price * x.qty, 0),
+        );
+        cartFoot.hidden = false;
+        document.querySelectorAll("[data-inc]").forEach(
+          (b) =>
+            (b.onclick = () => {
+              cartData[b.dataset.inc]++;
+              save();
+              renderCart();
+            }),
+        );
+        document.querySelectorAll("[data-dec]").forEach(
+          (b) =>
+            (b.onclick = () => {
+              if (--cartData[b.dataset.dec] < 1) delete cartData[b.dataset.dec];
+              save();
+              renderCart();
+            }),
+        );
+        document.querySelectorAll("[data-remove]").forEach(
+          (b) =>
+            (b.onclick = () => {
+              delete cartData[b.dataset.remove];
+              save();
+              renderCart();
+            }),
+        );
+      }
+      function adminView() {
+        if (sessionStorage.getItem("swapna-admin") !== "yes") {
+          adminContent.innerHTML = `<div class="login"><p class="sub">Sign in to manage products and prices on this browser.</p><div class="field"><label>Username</label><input id="user" value="admin"></div><div class="field"><label>Password</label><input id="pass" type="password"></div><button class="btn primary full" id="login">Sign in</button><p class="tip">Demo login: admin / swapna123</p></div>`;
+          document.getElementById("login").onclick = () => {
+            if (
+              document.getElementById("user").value === "admin" &&
+              document.getElementById("pass").value === "swapna123"
+            ) {
+              sessionStorage.setItem("swapna-admin", "yes");
+              adminView();
+            } else say("Incorrect admin login");
+          };
+          return;
+        }
+        adminContent.innerHTML = `<div class="admin-grid"><div class="field"><label>Product name</label><input id="newName" placeholder="Lavender coaster set"></div><div class="field"><label>Category</label><select id="newCategory"><option>Home decor</option><option>Jewellery</option><option>Gifts</option></select></div><div class="field"><label>Price (INR)</label><input id="newPrice" type="number" placeholder="799"></div><div class="field"><label>Image URL</label><input id="newImage" placeholder="https://..."></div><div class="field"><label>Description</label><input id="newDesc" placeholder="A tiny handmade treasure"></div><div class="field"><label>Tag</label><input id="newTag" value="New"></div></div><button class="btn primary" id="addProduct">Add product</button> <button class="btn outline" id="logout">Sign out</button><div class="admin-list">${products.map((p) => `<div class="admin-row"><img src="${p.image}" alt=""><div><b>${p.name}</b><span>${p.category}</span><input data-price="${p.id}" type="number" value="${p.price}" aria-label="Price for ${p.name}"></div><button data-saveprice="${p.id}">Save</button><button data-del="${p.id}">Delete</button></div>`).join("")}</div>`;
+        document.getElementById("addProduct").onclick = () => {
+          const name = document.getElementById("newName").value.trim(),
+            price = Number(document.getElementById("newPrice").value);
+          if (!name || !price) return say("Add a name and price first");
+          products.push({
+            id: Date.now(),
+            name,
+            price,
+            category: document.getElementById("newCategory").value,
+            image:
+              document.getElementById("newImage").value || defaults[0].image,
+            desc:
+              document.getElementById("newDesc").value ||
+              "Made with care by Swapna.",
+            tag: document.getElementById("newTag").value || "New",
+          });
+          save();
+          render();
+          adminView();
+          say("Product added");
+        };
+        document.getElementById("logout").onclick = () => {
+          sessionStorage.removeItem("swapna-admin");
+          adminView();
+        };
+        document.querySelectorAll("[data-saveprice]").forEach(
+          (b) =>
+            (b.onclick = () => {
+              const product = products.find(
+                  (p) => p.id === Number(b.dataset.saveprice),
+                ),
+                value = Number(
+                  document.querySelector(
+                    `[data-price="${b.dataset.saveprice}"]`,
+                  ).value,
+                );
+              if (!product || !value) return say("Enter a valid price");
+              product.price = value;
+              save();
+              render();
+              adminView();
+              say("Price updated");
+            }),
+        );
+        document.querySelectorAll("[data-del]").forEach(
+          (b) =>
+            (b.onclick = () => {
+              products = products.filter((p) => p.id !== Number(b.dataset.del));
+              save();
+              render();
+              adminView();
+              say("Product removed");
+            }),
+        );
+      }
+      let customer = JSON.parse(
+        localStorage.getItem("swapna-customer") || "null",
+      );
+      function renderAccount() {
+        const area = document.getElementById("accountContent");
+        if (customer) {
+          area.innerHTML = `<div class="account-welcome"><div class="mark" style="margin:auto">${customer.name.charAt(0).toUpperCase()}</div><h3>Welcome, ${customer.name}</h3><p>${customer.phone}<br>Your details are ready for a faster WhatsApp checkout.</p><button class="btn outline" id="customerLogout">Sign out</button></div>`;
+          document.getElementById("customerLogout").onclick = () => {
+            customer = null;
+            localStorage.removeItem("swapna-customer");
+            renderAccount();
+            updateAccountButton();
+            say("You have been signed out");
+          };
+          return;
+        }
+        area.innerHTML = `<div class="login"><p class="sub">Create an account to save your checkout details.</p><div class="field"><label>Full name</label><input id="customerName" placeholder="Your name" autocomplete="name"></div><div class="field"><label>WhatsApp number</label><input id="customerPhone" type="tel" placeholder="10-digit mobile number" autocomplete="tel"></div><button class="btn primary full" id="customerLogin">Continue</button><p class="account-switch">Guest checkout is also available.</p></div>`;
+        document.getElementById("customerLogin").onclick = () => {
+          const name = document.getElementById("customerName").value.trim(),
+            phone = document
+              .getElementById("customerPhone")
+              .value.replace(/\D/g, "");
+          if (name.length < 2 || phone.length < 10)
+            return say("Enter your name and 10-digit WhatsApp number");
+          customer = { name, phone };
+          localStorage.setItem("swapna-customer", JSON.stringify(customer));
+          renderAccount();
+          updateAccountButton();
+          say("Account details saved");
+        };
+      }
+      function updateAccountButton() {
+        const button = document.getElementById("account");
+        button.title = customer ? `Signed in as ${customer.name}` : "Account";
+        button.textContent = customer ? "●" : "♙";
+      }
+      const productsEl = document.getElementById("products"),
+        toast = document.getElementById("toast"),
+        count = document.getElementById("count"),
+        cartItems = document.getElementById("cartItems"),
+        cartFoot = document.getElementById("cartFoot"),
+        total = document.getElementById("total");
+      document.querySelectorAll(".filter").forEach(
+        (b) =>
+          (b.onclick = () => {
+            filter = b.dataset.filter;
+            document
+              .querySelectorAll(".filter")
+              .forEach((x) => x.classList.toggle("active", x === b));
+            render();
+          }),
+      );
+      const openCart = () => {
+        drawer.classList.add("open");
+        shade.classList.add("open");
+      };
+      cart.onclick = openCart;
+      closeCart.onclick = () => {
+        drawer.classList.remove("open");
+        shade.classList.remove("open");
+      };
+      shade.onclick = () => {
+        drawer.classList.remove("open");
+        shade.classList.remove("open");
+      };
+      account.onclick = () => {
+        renderAccount();
+        accountModal.classList.add("open");
+      };
+      closeAccount.onclick = () => accountModal.classList.remove("open");
+      closeAdmin.onclick = () => modal.classList.remove("open");
+      checkout.onclick = () => {
+        let es = entries(),
+          lines = es
+            .map((x) => `• ${x.p.name} x${x.qty} - ${money(x.p.price * x.qty)}`)
+            .join("%0A"),
+          sum = es.reduce((n, x) => n + x.p.price * x.qty, 0),
+          buyer = customer
+            ? `%0AName: ${encodeURIComponent(customer.name)}%0AWhatsApp: ${customer.phone}`
+            : "";
+        open(
+          `https://wa.me/919000430210?text=Hello Swapna! I would like to order:%0A${lines}%0A%0ATotal: ${money(sum)}${buyer}%0A%0AMy delivery details are: `,
+          "_blank",
+        );
+      };
+      render();
+      renderCart();
+    </script>
+    <script>
+      const API =
+        location.protocol === "file:" || location.port === "5500"
+          ? "http://localhost:3000/api"
+          : "/api";
+      let authToken = localStorage.getItem("swapna-token") || "",
+        currentUser = JSON.parse(localStorage.getItem("swapna-user") || "null");
+      async function api(path, options = {}) {
+        const response = await fetch(API + path, {
+          ...options,
+          headers: {
+            "Content-Type": "application/json",
+            ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
+          },
+        });
+        const data = await response
+          .json()
+          .catch(() => ({ error: "Unexpected server response." }));
+        if (!response.ok) throw new Error(data.error || "Request failed.");
+        return data;
+      }
+      function setSession(data) {
+        authToken = data.token;
+        currentUser = data.user;
+        localStorage.setItem("swapna-token", authToken);
+        localStorage.setItem("swapna-user", JSON.stringify(currentUser));
+        loadUserCart();
+        updateAccountButton();
+      }
+      async function loadUserCart() {
+        if (!currentUser) {
+          cartData = JSON.parse(
+            localStorage.getItem("swapna-cart-guest") || "{}",
+          );
+          renderCart();
+          return;
+        }
+        try {
+          const data = await api("/me/cart");
+          cartData = data.cart || {};
+          localStorage.setItem(cartKey(), JSON.stringify(cartData));
+          renderCart();
+        } catch (error) {
+          say("Your saved basket could not be loaded.");
+        }
+      }
+      async function saveUserCart() {
+        if (!currentUser) {
+          save();
+          return;
+        }
+        try {
+          await api("/me/cart", {
+            method: "PATCH",
+            body: JSON.stringify({ cart: cartData }),
+          });
+          localStorage.setItem(cartKey(), JSON.stringify(cartData));
+        } catch (error) {
+          say("Your basket could not be saved.");
+        }
+      }
+      function clearSession() {
+        authToken = "";
+        currentUser = null;
+        localStorage.removeItem("swapna-token");
+        localStorage.removeItem("swapna-user");
+        updateAccountButton();
+      }
+      function authMessage(error) {
+        say(error.message || "Please try again.");
+      }
+      function showAuth(view = "login") {
+        const area = document.getElementById("accountContent");
+        const login = view === "login";
+        const register = view === "register";
+        area.innerHTML = `<div class="login"><p class="sub">${login ? "Sign in with your email or international mobile number." : register ? "Create your customer account with secure password protection." : "Enter your email or mobile number and we will create a reset token."}</p>${register ? '<div class="field"><label>Full name</label><input id="authName" autocomplete="name" placeholder="Your name"></div>' : ""}<div class="field"><label>Email address</label><input id="authEmail" type="email" autocomplete="email" placeholder="you@example.com"></div>${register ? '<div class="field"><label>Mobile number</label><input id="authPhone" type="tel" autocomplete="tel" placeholder="+919000430210"></div>' : ""}${!register ? '<div class="field"><label>Email or mobile number</label><input id="authIdentifier" autocomplete="username" placeholder="Email or +countrycode number"></div>' : ""}${view === "reset" ? '<div class="field"><label>Reset token</label><input id="resetToken" placeholder="Paste your reset token"></div><div class="field"><label>New password</label><input id="resetPassword" type="password" placeholder="At least 8 characters"></div>' : '<div class="field"><label>Password</label><input id="authPassword" type="password" autocomplete="current-password" placeholder="At least 8 characters"></div>'}<button class="btn primary full" id="authSubmit">${login ? "Sign in" : register ? "Create account" : "Reset password"}</button><div class="account-switch">${login ? '<button id="toRegister">Create account</button> · <button id="toForgot">Forgot password?</button>' : register ? '<button id="toLogin">Already have an account?</button>' : '<button id="toLogin">Back to sign in</button>'}</div><p class="tip">Admin access is granted only to the registered admin email.</p></div>`;
+        document.getElementById("authSubmit").onclick = async () => {
+          try {
+            if (register) {
+              const data = await api("/auth/register", {
+                method: "POST",
+                body: JSON.stringify({
+                  name: authName.value,
+                  email: authEmail.value,
+                  phone: authPhone.value,
+                  password: authPassword.value,
+                }),
+              });
+              setSession(data);
+              closeAccount.click();
+              say("Account created");
+            } else if (login) {
+              const data = await api("/auth/login", {
+                method: "POST",
+                body: JSON.stringify({
+                  identifier: authIdentifier.value,
+                  password: authPassword.value,
+                }),
+              });
+              setSession(data);
+              closeAccount.click();
+              say(
+                data.user.role === "admin" ? "Admin signed in" : "Welcome back",
+              );
+            } else {
+              const data = await api("/auth/forgot", {
+                method: "POST",
+                body: JSON.stringify({
+                  identifier: authEmail.value || authIdentifier?.value,
+                }),
+              });
+              if (data.developmentResetToken) {
+                showAuth("reset");
+                document.getElementById("resetToken").value =
+                  data.developmentResetToken;
+                say("Reset token created for local development");
+              } else say(data.message);
+            }
+          } catch (error) {
+            authMessage(error);
+          }
+        };
+        if (document.getElementById("toRegister"))
+          document.getElementById("toRegister").onclick = () =>
+            showAuth("register");
+        if (document.getElementById("toForgot"))
+          document.getElementById("toForgot").onclick = () =>
+            showAuth("forgot");
+        if (document.getElementById("toLogin"))
+          document.getElementById("toLogin").onclick = () => showAuth("login");
+      }
+      async function renderAccount() {
+        if (currentUser) {
+          document.getElementById("accountContent").innerHTML =
+            `<div class="account-welcome"><div class="mark" style="margin:auto">${currentUser.name.charAt(0).toUpperCase()}</div><h3>Welcome, ${currentUser.name}</h3><p>${currentUser.email}<br>${currentUser.phone || "Admin account"}<br>Role: ${currentUser.role}</p><button class="btn outline" id="customerLogout">Sign out</button></div>`;
+          document.getElementById("customerLogout").onclick = async () => {
+            await saveUserCart();
+            try {
+              await api("/auth/logout", { method: "POST" });
+            } catch {}
+            clearSession();
+            renderAccount();
+            say("You have been signed out");
+          };
+          return;
+        }
+        showAuth("login");
+      }
+      async function openAccount() {
+        document.getElementById("accountModal").classList.add("open");
+        if (authToken && !currentUser) {
+          try {
+            currentUser = (await api("/auth/me")).user;
+            localStorage.setItem("swapna-user", JSON.stringify(currentUser));
+          } catch {
+            clearSession();
+          }
+        }
+        renderAccount();
+      }
+      function updateAccountButton() {
+        const button = document.getElementById("account");
+        button.title = currentUser
+          ? `Signed in as ${currentUser.name}`
+          : "Sign in";
+        button.innerHTML = currentUser
+          ? '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.2 3.1-5 7-5s6.2 1.8 7 5"/></svg>'
+          : '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.2 3.1-5 7-5s6.2 1.8 7 5"/></svg>';
+      }
+      async function adminDashboard() {
+        if (!currentUser || currentUser.role !== "admin") return openAccount();
+        document.getElementById("modal").classList.add("open");
+        const products = (await api("/products")).products;
+        document.getElementById("adminContent").innerHTML =
+          `<div class="admin-grid"><div class="field"><label>Product name</label><input id="newName" placeholder="Lavender coaster set"></div><div class="field"><label>Category</label><select id="newCategory"><option>Home decor</option><option>Jewellery</option><option>Gifts</option></select></div><div class="field"><label>Price (INR)</label><input id="newPrice" type="number" placeholder="799"></div><div class="field"><label>Image URL</label><input id="newImage" placeholder="https://..."></div><div class="field"><label>Description</label><input id="newDesc" placeholder="A tiny handmade treasure"></div><div class="field"><label>Tag</label><input id="newTag" value="New"></div></div><button class="btn primary" id="addProduct">Add product</button> <button class="btn outline" id="adminLogout">Sign out</button><div class="admin-list">${products.map((p) => `<div class="admin-row"><img src="${p.image}" alt=""><div><b>${p.name}</b><span>${p.category}</span><input data-price="${p.id}" type="number" value="${p.price}" aria-label="Price for ${p.name}"></div><button data-saveprice="${p.id}">Save</button><button data-del="${p.id}">Delete</button></div>`).join("")}</div>`;
+        document.getElementById("adminLogout").onclick = async () => {
+          await saveUserCart();
+          try {
+            await api("/auth/logout", { method: "POST" });
+          } catch {}
+          clearSession();
+          document.getElementById("modal").classList.remove("open");
+          showAuth("login");
+        };
+        document.getElementById("addProduct").onclick = async () => {
+          try {
+            await api("/admin/products", {
+              method: "POST",
+              body: JSON.stringify({
+                name: newName.value,
+                category: newCategory.value,
+                price: newPrice.value,
+                image: newImage.value,
+                desc: newDesc.value,
+                tag: newTag.value,
+              }),
+            });
+            say("Product added");
+            adminDashboard();
+          } catch (error) {
+            authMessage(error);
+          }
+        };
+        document.querySelectorAll("[data-saveprice]").forEach(
+          (button) =>
+            (button.onclick = async () => {
+              try {
+                await api(`/admin/products/${button.dataset.saveprice}`, {
+                  method: "PATCH",
+                  body: JSON.stringify({
+                    price: document.querySelector(
+                      `[data-price="${button.dataset.saveprice}"]`,
+                    ).value,
+                  }),
+                });
+                say("Price updated");
+                adminDashboard();
+              } catch (error) {
+                authMessage(error);
+              }
+            }),
+        );
+        document.querySelectorAll("[data-del]").forEach(
+          (button) =>
+            (button.onclick = async () => {
+              try {
+                await api(`/admin/products/${button.dataset.del}`, {
+                  method: "DELETE",
+                });
+                say("Product removed");
+                adminDashboard();
+              } catch (error) {
+                authMessage(error);
+              }
+            }),
+        );
+      }
+      document.getElementById("account").onclick = openAccount;
+      document.getElementById("closeAccount").onclick = () =>
+        document.getElementById("accountModal").classList.remove("open");
+      document.getElementById("closeAdmin").onclick = () =>
+        document.getElementById("modal").classList.remove("open");
+      const baseShowAuth = showAuth;
+      showAuth = function (view = "login") {
+        baseShowAuth(view);
+        const emailField = document
+          .getElementById("authEmail")
+          ?.closest(".field");
+        if (document.getElementById("authIdentifier") && emailField)
+          emailField.style.display = "none";
+        if (view === "register") {
+          const phoneField = document
+            .getElementById("authPhone")
+            ?.closest(".field");
+          const countryCodes = [
+            ["+91", "India"],
+            ["+1", "United States / Canada"],
+            ["+44", "United Kingdom"],
+            ["+61", "Australia"],
+            ["+64", "New Zealand"],
+            ["+65", "Singapore"],
+            ["+60", "Malaysia"],
+            ["+971", "United Arab Emirates"],
+            ["+966", "Saudi Arabia"],
+            ["+974", "Qatar"],
+            ["+968", "Oman"],
+            ["+973", "Bahrain"],
+            ["+965", "Kuwait"],
+            ["+27", "South Africa"],
+            ["+234", "Nigeria"],
+            ["+254", "Kenya"],
+            ["+20", "Egypt"],
+            ["+33", "France"],
+            ["+49", "Germany"],
+            ["+39", "Italy"],
+            ["+34", "Spain"],
+            ["+31", "Netherlands"],
+            ["+32", "Belgium"],
+            ["+41", "Switzerland"],
+            ["+43", "Austria"],
+            ["+46", "Sweden"],
+            ["+47", "Norway"],
+            ["+45", "Denmark"],
+            ["+358", "Finland"],
+            ["+48", "Poland"],
+            ["+90", "Turkey"],
+            ["+7", "Russia / Kazakhstan"],
+            ["+81", "Japan"],
+            ["+82", "South Korea"],
+            ["+86", "China"],
+            ["+852", "Hong Kong"],
+            ["+886", "Taiwan"],
+            ["+66", "Thailand"],
+            ["+84", "Vietnam"],
+            ["+62", "Indonesia"],
+            ["+63", "Philippines"],
+            ["+92", "Pakistan"],
+            ["+880", "Bangladesh"],
+            ["+94", "Sri Lanka"],
+            ["+977", "Nepal"],
+            ["+55", "Brazil"],
+            ["+52", "Mexico"],
+            ["+54", "Argentina"],
+            ["+56", "Chile"],
+          ];
+          if (phoneField) {
+            phoneField.innerHTML = `<label>Mobile number</label><div class="phone-entry"><select id="authCountry" aria-label="Country calling code">${countryCodes.map(([code, name]) => `<option value="${code}">${name} (${code})</option>`).join("")}</select><input id="authPhone" type="tel" autocomplete="tel-national" placeholder="9000430210" inputmode="tel"></div><small class="tip">Choose your country code and enter the local number. We store it as an international number.</small>`;
+          }
+          document.getElementById("authSubmit").onclick = async () => {
+            try {
+              const phone = `${document.getElementById("authCountry").value}${document.getElementById("authPhone").value.replace(/\D/g, "")}`;
+              const data = await api("/auth/register", {
+                method: "POST",
+                body: JSON.stringify({
+                  name: document.getElementById("authName").value,
+                  email: document.getElementById("authEmail").value,
+                  phone,
+                  password: document.getElementById("authPassword").value,
+                }),
+              });
+              setSession(data);
+              closeAccount.click();
+              say("Account created");
+            } catch (error) {
+              authMessage(error);
+            }
+          };
+        }
+        if (view === "login") {
+          const identifierField = document
+            .getElementById("authIdentifier")
+            ?.closest(".field");
+          if (identifierField) {
+            const loginCodes = [
+              ["+91", "India"],
+              ["+1", "United States / Canada"],
+              ["+44", "United Kingdom"],
+              ["+61", "Australia"],
+              ["+64", "New Zealand"],
+              ["+65", "Singapore"],
+              ["+60", "Malaysia"],
+              ["+971", "United Arab Emirates"],
+              ["+966", "Saudi Arabia"],
+              ["+974", "Qatar"],
+              ["+968", "Oman"],
+              ["+973", "Bahrain"],
+              ["+27", "South Africa"],
+              ["+234", "Nigeria"],
+              ["+254", "Kenya"],
+              ["+33", "France"],
+              ["+49", "Germany"],
+              ["+39", "Italy"],
+              ["+34", "Spain"],
+              ["+31", "Netherlands"],
+              ["+41", "Switzerland"],
+              ["+46", "Sweden"],
+              ["+47", "Norway"],
+              ["+48", "Poland"],
+              ["+90", "Turkey"],
+              ["+81", "Japan"],
+              ["+82", "South Korea"],
+              ["+86", "China"],
+              ["+66", "Thailand"],
+              ["+84", "Vietnam"],
+              ["+62", "Indonesia"],
+              ["+63", "Philippines"],
+              ["+92", "Pakistan"],
+              ["+880", "Bangladesh"],
+              ["+94", "Sri Lanka"],
+              ["+977", "Nepal"],
+              ["+55", "Brazil"],
+              ["+52", "Mexico"],
+              ["+54", "Argentina"],
+              ["+56", "Chile"],
+            ];
+            identifierField.innerHTML = `<label>Sign-in method</label><select id="authLoginType"><option value="email">Email address</option><option value="phone">Mobile number</option></select><input id="authIdentifier" autocomplete="username" placeholder="you@example.com">`;
+            const type = document.getElementById("authLoginType");
+            const input = document.getElementById("authIdentifier");
+            type.onchange = () => {
+              const phone = type.value === "phone";
+              input.type = phone ? "tel" : "email";
+              input.placeholder = phone ? "9000430210" : "you@example.com";
+              if (phone && !document.getElementById("authLoginCountry")) {
+                input.insertAdjacentHTML(
+                  "beforebegin",
+                  `<select id="authLoginCountry" aria-label="Country calling code">${loginCodes.map(([code, name]) => `<option value="${code}">${name} (${code})</option>`).join("")}</select>`,
+                );
+              } else if (!phone)
+                document.getElementById("authLoginCountry")?.remove();
+            };
+            document.getElementById("authSubmit").onclick = async () => {
+              try {
+                const identifier =
+                  type.value === "phone"
+                    ? `${document.getElementById("authLoginCountry").value}${input.value.replace(/\D/g, "")}`
+                    : input.value.trim().toLowerCase();
+                const data = await api("/auth/login", {
+                  method: "POST",
+                  body: JSON.stringify({
+                    identifier,
+                    password: document.getElementById("authPassword").value,
+                  }),
+                });
+                setSession(data);
+                closeAccount.click();
+                say(
+                  data.user.role === "admin"
+                    ? "Admin signed in"
+                    : "Welcome back",
+                );
+              } catch (error) {
+                authMessage(error);
+              }
+            };
+          }
+        }
+        if (view === "reset")
+          document.getElementById("authSubmit").onclick = async () => {
+            try {
+              await api("/auth/reset", {
+                method: "POST",
+                body: JSON.stringify({
+                  token: document.getElementById("resetToken").value,
+                  password: document.getElementById("resetPassword").value,
+                }),
+              });
+              say("Password reset successfully");
+              showAuth("login");
+            } catch (error) {
+              authMessage(error);
+            }
+          };
+      };
+      async function openOrderForm() {
+        if (!entries().length) return say("Add a product to your basket first");
+        document.getElementById("orderName").value = currentUser?.name || "";
+        document.getElementById("orderEmail").value = currentUser?.email || "";
+        document.getElementById("orderPhone").value = currentUser?.phone || "";
+        if (currentUser) {
+          try {
+            const saved = await api("/me/profile");
+            const profile = saved.profile || {};
+            Object.entries({
+              orderName: profile.name,
+              orderEmail: profile.email,
+              orderPhone: profile.phone,
+              orderCountry: profile.country,
+              orderAddress: profile.address,
+              orderCity: profile.city,
+              orderState: profile.state,
+              orderPostal: profile.postal,
+            }).forEach(([id, value]) => {
+              if (value) document.getElementById(id).value = value;
+            });
+          } catch (error) {
+            say("Saved delivery details could not be loaded.");
+          }
+        }
+        document.getElementById("orderModal").classList.add("open");
+      }
+      document.getElementById("checkout").onclick = openOrderForm;
+      document.getElementById("closeOrder").onclick = () =>
+        document.getElementById("orderModal").classList.remove("open");
+      document.getElementById("confirmOrder").onclick = async () => {
+        const fields = [
+          "orderName",
+          "orderEmail",
+          "orderPhone",
+          "orderCountry",
+          "orderAddress",
+          "orderCity",
+          "orderState",
+          "orderPostal",
+        ].map((id) => document.getElementById(id));
+        fields.forEach((field) =>
+          field.closest(".field").classList.remove("invalid"),
+        );
+        const values = Object.fromEntries(
+          fields.map((field) => [field.id, field.value.trim()]),
+        );
+        const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.orderEmail);
+        const phoneOk = /^\+[1-9]\d{7,14}$/.test(
+          values.orderPhone.replace(/[\s()-]/g, ""),
+        );
+        const postalOk = /^[A-Za-z0-9][A-Za-z0-9 -]{2,9}$/.test(
+          values.orderPostal,
+        );
+        const invalid = fields.filter((field) => !field.value.trim());
+        if (
+          !emailOk ||
+          !phoneOk ||
+          !postalOk ||
+          values.orderAddress.length < 10
+        ) {
+          if (!emailOk) invalid.push(document.getElementById("orderEmail"));
+          if (!phoneOk) invalid.push(document.getElementById("orderPhone"));
+          if (!postalOk) invalid.push(document.getElementById("orderPostal"));
+          if (values.orderAddress.length < 10)
+            invalid.push(document.getElementById("orderAddress"));
+        }
+        if (invalid.length) {
+          [...new Set(invalid)].forEach((field) =>
+            field.closest(".field").classList.add("invalid"),
+          );
+          return say("Check every required delivery field");
+        }
+        const lines = entries()
+          .map(
+            (item) =>
+              `• ${item.p.name} x${item.qty} - ${money(item.p.price * item.qty)}`,
+          )
+          .join("%0A");
+        const totalValue = entries().reduce(
+          (sum, item) => sum + item.p.price * item.qty,
+          0,
+        );
+        const details = [
+          `Name: ${values.orderName}`,
+          `Email: ${values.orderEmail}`,
+          `WhatsApp: ${values.orderPhone}`,
+          `Address: ${values.orderAddress}, ${values.orderCity}, ${values.orderState}, ${values.orderPostal}, ${values.orderCountry}`,
+        ]
+          .map((line) => encodeURIComponent(line))
+          .join("%0A");
+        if (currentUser) {
+          const profile = {
+            name: values.orderName,
+            email: values.orderEmail,
+            phone: values.orderPhone.replace(/[\s()-]/g, ""),
+            country: values.orderCountry,
+            address: values.orderAddress,
+            city: values.orderCity,
+            state: values.orderState,
+            postal: values.orderPostal,
+          };
+          try {
+            await api("/me/profile", {
+              method: "PATCH",
+              body: JSON.stringify(profile),
+            });
+            await api("/me/orders", {
+              method: "POST",
+              body: JSON.stringify({
+                items: entries().map((item) => ({
+                  id: item.p.id,
+                  name: item.p.name,
+                  quantity: item.qty,
+                  price: item.p.price,
+                })),
+                total: totalValue,
+                profile,
+              }),
+            });
+          } catch (error) {
+            return authMessage(error);
+          }
+        }
+        window.open(
+          `https://wa.me/919000430210?text=Hello Swapna! I would like to order:%0A${lines}%0A%0ATotal: ${money(totalValue)}%0A%0A${details}%0A%0APlease confirm my order.`,
+          "_blank",
+        );
+        document.getElementById("orderModal").classList.remove("open");
+        document.getElementById("drawer").classList.remove("open");
+        document.getElementById("shade").classList.remove("open");
+      };
+      if (location.protocol !== "file:") {
+        api("/products")
+          .then((data) => {
+            products = data.products;
+            render();
+          })
+          .catch(() =>
+            say(
+              "Backend is not available. Start the server with node server.js.",
+            ),
+          );
+      }
+      updateAccountButton();
+      loadUserCart();
+    </script>
+  </body>
+</html>
