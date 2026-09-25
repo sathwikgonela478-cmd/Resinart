@@ -576,33 +576,47 @@
         border-top: 1px solid var(--line);
         margin-top: 20px;
       }
+      
+      /* Updated Admin List Styles */
       .admin-row {
-        display: grid;
-        grid-template-columns: 52px 1fr auto;
-        gap: 11px;
-        align-items: center;
-        padding: 11px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 14px 0;
         border-bottom: 1px solid var(--line);
       }
-      .admin-row img {
-        width: 52px;
-        height: 52px;
-        object-fit: cover;
+      .admin-row-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
       }
-      .admin-row b {
-        display: block;
-        font-size: 13px;
+      .admin-row-thumb {
+        display: flex;
+        align-items: center;
+        gap: 12px;
       }
-      .admin-row span {
-        color: var(--muted);
-        font-size: 11px;
+      .admin-edit-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 8px;
+        background: var(--cream);
+        padding: 12px;
+        border-radius: 4px;
       }
-      .admin-row button {
-        border: 0;
-        background: none;
-        color: var(--coral);
-        font-size: 11px;
+      .admin-edit-grid input,
+      .admin-edit-grid select {
+        font-size: 12px;
+        padding: 6px;
+        border: 1px solid var(--line);
+        background: #fff;
       }
+      .admin-actions {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      /* End Updated Admin List Styles */
+      
       .toast {
         position: fixed;
         z-index: 20;
@@ -1049,6 +1063,8 @@
       </div>
     </section>
     <div class="toast" id="toast"></div>
+    
+    <!-- Static App logic (guest cart, local fallback) -->
     <script>
       const defaults = [
         {
@@ -1218,112 +1234,7 @@
             }),
         );
       }
-      function adminView() {
-        if (sessionStorage.getItem("swapna-admin") !== "yes") {
-          adminContent.innerHTML = `<div class="login"><p class="sub">Sign in to manage products and prices on this browser.</p><div class="field"><label>Username</label><input id="user" value="admin"></div><div class="field"><label>Password</label><input id="pass" type="password"></div><button class="btn primary full" id="login">Sign in</button><p class="tip">Demo login: admin / swapna123</p></div>`;
-          document.getElementById("login").onclick = () => {
-            if (
-              document.getElementById("user").value === "admin" &&
-              document.getElementById("pass").value === "swapna123"
-            ) {
-              sessionStorage.setItem("swapna-admin", "yes");
-              adminView();
-            } else say("Incorrect admin login");
-          };
-          return;
-        }
-        adminContent.innerHTML = `<div class="admin-grid"><div class="field"><label>Product name</label><input id="newName" placeholder="Lavender coaster set"></div><div class="field"><label>Category</label><select id="newCategory"><option>Home decor</option><option>Jewellery</option><option>Gifts</option></select></div><div class="field"><label>Price (INR)</label><input id="newPrice" type="number" placeholder="799"></div><div class="field"><label>Image URL</label><input id="newImage" placeholder="https://..."></div><div class="field"><label>Description</label><input id="newDesc" placeholder="A tiny handmade treasure"></div><div class="field"><label>Tag</label><input id="newTag" value="New"></div></div><button class="btn primary" id="addProduct">Add product</button> <button class="btn outline" id="logout">Sign out</button><div class="admin-list">${products.map((p) => `<div class="admin-row"><img src="${p.image}" alt=""><div><b>${p.name}</b><span>${p.category}</span><input data-price="${p.id}" type="number" value="${p.price}" aria-label="Price for ${p.name}"></div><button data-saveprice="${p.id}">Save</button><button data-del="${p.id}">Delete</button></div>`).join("")}</div>`;
-        document.getElementById("addProduct").onclick = () => {
-          const name = document.getElementById("newName").value.trim(),
-            price = Number(document.getElementById("newPrice").value);
-          if (!name || !price) return say("Add a name and price first");
-          products.push({
-            id: Date.now(),
-            name,
-            price,
-            category: document.getElementById("newCategory").value,
-            image:
-              document.getElementById("newImage").value || defaults[0].image,
-            desc:
-              document.getElementById("newDesc").value ||
-              "Made with care by Swapna.",
-            tag: document.getElementById("newTag").value || "New",
-          });
-          save();
-          render();
-          adminView();
-          say("Product added");
-        };
-        document.getElementById("logout").onclick = () => {
-          sessionStorage.removeItem("swapna-admin");
-          adminView();
-        };
-        document.querySelectorAll("[data-saveprice]").forEach(
-          (b) =>
-            (b.onclick = () => {
-              const product = products.find(
-                  (p) => p.id === Number(b.dataset.saveprice),
-                ),
-                value = Number(
-                  document.querySelector(
-                    `[data-price="${b.dataset.saveprice}"]`,
-                  ).value,
-                );
-              if (!product || !value) return say("Enter a valid price");
-              product.price = value;
-              save();
-              render();
-              adminView();
-              say("Price updated");
-            }),
-        );
-        document.querySelectorAll("[data-del]").forEach(
-          (b) =>
-            (b.onclick = () => {
-              products = products.filter((p) => p.id !== Number(b.dataset.del));
-              save();
-              render();
-              adminView();
-              say("Product removed");
-            }),
-        );
-      }
-      let customer = JSON.parse(
-        localStorage.getItem("swapna-customer") || "null",
-      );
-      function renderAccount() {
-        const area = document.getElementById("accountContent");
-        if (customer) {
-          area.innerHTML = `<div class="account-welcome"><div class="mark" style="margin:auto">${customer.name.charAt(0).toUpperCase()}</div><h3>Welcome, ${customer.name}</h3><p>${customer.phone}<br>Your details are ready for a faster WhatsApp checkout.</p><button class="btn outline" id="customerLogout">Sign out</button></div>`;
-          document.getElementById("customerLogout").onclick = () => {
-            customer = null;
-            localStorage.removeItem("swapna-customer");
-            renderAccount();
-            updateAccountButton();
-            say("You have been signed out");
-          };
-          return;
-        }
-        area.innerHTML = `<div class="login"><p class="sub">Create an account to save your checkout details.</p><div class="field"><label>Full name</label><input id="customerName" placeholder="Your name" autocomplete="name"></div><div class="field"><label>WhatsApp number</label><input id="customerPhone" type="tel" placeholder="10-digit mobile number" autocomplete="tel"></div><button class="btn primary full" id="customerLogin">Continue</button><p class="account-switch">Guest checkout is also available.</p></div>`;
-        document.getElementById("customerLogin").onclick = () => {
-          const name = document.getElementById("customerName").value.trim(),
-            phone = document
-              .getElementById("customerPhone")
-              .value.replace(/\D/g, "");
-          if (name.length < 2 || phone.length < 10)
-            return say("Enter your name and 10-digit WhatsApp number");
-          customer = { name, phone };
-          localStorage.setItem("swapna-customer", JSON.stringify(customer));
-          renderAccount();
-          updateAccountButton();
-          say("Account details saved");
-        };
-      }
-      function updateAccountButton() {
-        const button = document.getElementById("account");
-        button.title = customer ? `Signed in as ${customer.name}` : "Account";
-        button.textContent = customer ? "●" : "♙";
-      }
+      
       const productsEl = document.getElementById("products"),
         toast = document.getElementById("toast"),
         count = document.getElementById("count"),
@@ -1359,23 +1270,12 @@
       };
       closeAccount.onclick = () => accountModal.classList.remove("open");
       closeAdmin.onclick = () => modal.classList.remove("open");
-      checkout.onclick = () => {
-        let es = entries(),
-          lines = es
-            .map((x) => `• ${x.p.name} x${x.qty} - ${money(x.p.price * x.qty)}`)
-            .join("%0A"),
-          sum = es.reduce((n, x) => n + x.p.price * x.qty, 0),
-          buyer = customer
-            ? `%0AName: ${encodeURIComponent(customer.name)}%0AWhatsApp: ${customer.phone}`
-            : "";
-        open(
-          `https://wa.me/919000430210?text=Hello Swapna! I would like to order:%0A${lines}%0A%0ATotal: ${money(sum)}${buyer}%0A%0AMy delivery details are: `,
-          "_blank",
-        );
-      };
+      
       render();
       renderCart();
     </script>
+    
+    <!-- Backend API Integration Logic -->
     <script>
       const API =
         location.protocol === "file:" || location.port === "5500"
@@ -1447,7 +1347,8 @@
       function authMessage(error) {
         say(error.message || "Please try again.");
       }
-      function showAuth(view = "login") {
+      
+      let baseShowAuth = function (view = "login") {
         const area = document.getElementById("accountContent");
         const login = view === "login";
         const register = view === "register";
@@ -1506,120 +1407,9 @@
             showAuth("forgot");
         if (document.getElementById("toLogin"))
           document.getElementById("toLogin").onclick = () => showAuth("login");
-      }
-      async function renderAccount() {
-        if (currentUser) {
-          document.getElementById("accountContent").innerHTML =
-            `<div class="account-welcome"><div class="mark" style="margin:auto">${currentUser.name.charAt(0).toUpperCase()}</div><h3>Welcome, ${currentUser.name}</h3><p>${currentUser.email}<br>${currentUser.phone || "Admin account"}<br>Role: ${currentUser.role}</p><button class="btn outline" id="customerLogout">Sign out</button></div>`;
-          document.getElementById("customerLogout").onclick = async () => {
-            await saveUserCart();
-            try {
-              await api("/auth/logout", { method: "POST" });
-            } catch {}
-            clearSession();
-            renderAccount();
-            say("You have been signed out");
-          };
-          return;
-        }
-        showAuth("login");
-      }
-      async function openAccount() {
-        document.getElementById("accountModal").classList.add("open");
-        if (authToken && !currentUser) {
-          try {
-            currentUser = (await api("/auth/me")).user;
-            localStorage.setItem("swapna-user", JSON.stringify(currentUser));
-          } catch {
-            clearSession();
-          }
-        }
-        renderAccount();
-      }
-      function updateAccountButton() {
-        const button = document.getElementById("account");
-        button.title = currentUser
-          ? `Signed in as ${currentUser.name}`
-          : "Sign in";
-        button.innerHTML = currentUser
-          ? '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.2 3.1-5 7-5s6.2 1.8 7 5"/></svg>'
-          : '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.2 3.1-5 7-5s6.2 1.8 7 5"/></svg>';
-      }
-      async function adminDashboard() {
-        if (!currentUser || currentUser.role !== "admin") return openAccount();
-        document.getElementById("modal").classList.add("open");
-        const products = (await api("/products")).products;
-        document.getElementById("adminContent").innerHTML =
-          `<div class="admin-grid"><div class="field"><label>Product name</label><input id="newName" placeholder="Lavender coaster set"></div><div class="field"><label>Category</label><select id="newCategory"><option>Home decor</option><option>Jewellery</option><option>Gifts</option></select></div><div class="field"><label>Price (INR)</label><input id="newPrice" type="number" placeholder="799"></div><div class="field"><label>Image URL</label><input id="newImage" placeholder="https://..."></div><div class="field"><label>Description</label><input id="newDesc" placeholder="A tiny handmade treasure"></div><div class="field"><label>Tag</label><input id="newTag" value="New"></div></div><button class="btn primary" id="addProduct">Add product</button> <button class="btn outline" id="adminLogout">Sign out</button><div class="admin-list">${products.map((p) => `<div class="admin-row"><img src="${p.image}" alt=""><div><b>${p.name}</b><span>${p.category}</span><input data-price="${p.id}" type="number" value="${p.price}" aria-label="Price for ${p.name}"></div><button data-saveprice="${p.id}">Save</button><button data-del="${p.id}">Delete</button></div>`).join("")}</div>`;
-        document.getElementById("adminLogout").onclick = async () => {
-          await saveUserCart();
-          try {
-            await api("/auth/logout", { method: "POST" });
-          } catch {}
-          clearSession();
-          document.getElementById("modal").classList.remove("open");
-          showAuth("login");
-        };
-        document.getElementById("addProduct").onclick = async () => {
-          try {
-            await api("/admin/products", {
-              method: "POST",
-              body: JSON.stringify({
-                name: newName.value,
-                category: newCategory.value,
-                price: newPrice.value,
-                image: newImage.value,
-                desc: newDesc.value,
-                tag: newTag.value,
-              }),
-            });
-            say("Product added");
-            adminDashboard();
-          } catch (error) {
-            authMessage(error);
-          }
-        };
-        document.querySelectorAll("[data-saveprice]").forEach(
-          (button) =>
-            (button.onclick = async () => {
-              try {
-                await api(`/admin/products/${button.dataset.saveprice}`, {
-                  method: "PATCH",
-                  body: JSON.stringify({
-                    price: document.querySelector(
-                      `[data-price="${button.dataset.saveprice}"]`,
-                    ).value,
-                  }),
-                });
-                say("Price updated");
-                adminDashboard();
-              } catch (error) {
-                authMessage(error);
-              }
-            }),
-        );
-        document.querySelectorAll("[data-del]").forEach(
-          (button) =>
-            (button.onclick = async () => {
-              try {
-                await api(`/admin/products/${button.dataset.del}`, {
-                  method: "DELETE",
-                });
-                say("Product removed");
-                adminDashboard();
-              } catch (error) {
-                authMessage(error);
-              }
-            }),
-        );
-      }
-      document.getElementById("account").onclick = openAccount;
-      document.getElementById("closeAccount").onclick = () =>
-        document.getElementById("accountModal").classList.remove("open");
-      document.getElementById("closeAdmin").onclick = () =>
-        document.getElementById("modal").classList.remove("open");
-      const baseShowAuth = showAuth;
-      showAuth = function (view = "login") {
+      };
+      
+      let showAuth = function (view = "login") {
         baseShowAuth(view);
         const emailField = document
           .getElementById("authEmail")
@@ -1631,55 +1421,9 @@
             .getElementById("authPhone")
             ?.closest(".field");
           const countryCodes = [
-            ["+91", "India"],
-            ["+1", "United States / Canada"],
-            ["+44", "United Kingdom"],
-            ["+61", "Australia"],
-            ["+64", "New Zealand"],
-            ["+65", "Singapore"],
-            ["+60", "Malaysia"],
-            ["+971", "United Arab Emirates"],
-            ["+966", "Saudi Arabia"],
-            ["+974", "Qatar"],
-            ["+968", "Oman"],
-            ["+973", "Bahrain"],
-            ["+965", "Kuwait"],
-            ["+27", "South Africa"],
-            ["+234", "Nigeria"],
-            ["+254", "Kenya"],
-            ["+20", "Egypt"],
-            ["+33", "France"],
-            ["+49", "Germany"],
-            ["+39", "Italy"],
-            ["+34", "Spain"],
-            ["+31", "Netherlands"],
-            ["+32", "Belgium"],
-            ["+41", "Switzerland"],
-            ["+43", "Austria"],
-            ["+46", "Sweden"],
-            ["+47", "Norway"],
-            ["+45", "Denmark"],
-            ["+358", "Finland"],
-            ["+48", "Poland"],
-            ["+90", "Turkey"],
-            ["+7", "Russia / Kazakhstan"],
-            ["+81", "Japan"],
-            ["+82", "South Korea"],
-            ["+86", "China"],
-            ["+852", "Hong Kong"],
-            ["+886", "Taiwan"],
-            ["+66", "Thailand"],
-            ["+84", "Vietnam"],
-            ["+62", "Indonesia"],
-            ["+63", "Philippines"],
-            ["+92", "Pakistan"],
-            ["+880", "Bangladesh"],
-            ["+94", "Sri Lanka"],
-            ["+977", "Nepal"],
-            ["+55", "Brazil"],
-            ["+52", "Mexico"],
-            ["+54", "Argentina"],
-            ["+56", "Chile"],
+            ["+91", "India"], ["+1", "United States / Canada"], ["+44", "United Kingdom"],
+            ["+61", "Australia"], ["+64", "New Zealand"], ["+65", "Singapore"],
+            ["+971", "United Arab Emirates"], ["+966", "Saudi Arabia"]
           ];
           if (phoneField) {
             phoneField.innerHTML = `<label>Mobile number</label><div class="phone-entry"><select id="authCountry" aria-label="Country calling code">${countryCodes.map(([code, name]) => `<option value="${code}">${name} (${code})</option>`).join("")}</select><input id="authPhone" type="tel" autocomplete="tel-national" placeholder="9000430210" inputmode="tel"></div><small class="tip">Choose your country code and enter the local number. We store it as an international number.</small>`;
@@ -1710,46 +1454,7 @@
             ?.closest(".field");
           if (identifierField) {
             const loginCodes = [
-              ["+91", "India"],
-              ["+1", "United States / Canada"],
-              ["+44", "United Kingdom"],
-              ["+61", "Australia"],
-              ["+64", "New Zealand"],
-              ["+65", "Singapore"],
-              ["+60", "Malaysia"],
-              ["+971", "United Arab Emirates"],
-              ["+966", "Saudi Arabia"],
-              ["+974", "Qatar"],
-              ["+968", "Oman"],
-              ["+973", "Bahrain"],
-              ["+27", "South Africa"],
-              ["+234", "Nigeria"],
-              ["+254", "Kenya"],
-              ["+33", "France"],
-              ["+49", "Germany"],
-              ["+39", "Italy"],
-              ["+34", "Spain"],
-              ["+31", "Netherlands"],
-              ["+41", "Switzerland"],
-              ["+46", "Sweden"],
-              ["+47", "Norway"],
-              ["+48", "Poland"],
-              ["+90", "Turkey"],
-              ["+81", "Japan"],
-              ["+82", "South Korea"],
-              ["+86", "China"],
-              ["+66", "Thailand"],
-              ["+84", "Vietnam"],
-              ["+62", "Indonesia"],
-              ["+63", "Philippines"],
-              ["+92", "Pakistan"],
-              ["+880", "Bangladesh"],
-              ["+94", "Sri Lanka"],
-              ["+977", "Nepal"],
-              ["+55", "Brazil"],
-              ["+52", "Mexico"],
-              ["+54", "Argentina"],
-              ["+56", "Chile"],
+              ["+91", "India"], ["+1", "US / Canada"], ["+44", "UK"], ["+61", "Australia"]
             ];
             identifierField.innerHTML = `<label>Sign-in method</label><select id="authLoginType"><option value="email">Email address</option><option value="phone">Mobile number</option></select><input id="authIdentifier" autocomplete="username" placeholder="you@example.com">`;
             const type = document.getElementById("authLoginType");
@@ -1809,6 +1514,215 @@
             }
           };
       };
+
+      async function renderAccount() {
+        if (currentUser) {
+          const isAdmin = currentUser.role === "admin";
+          document.getElementById("accountContent").innerHTML = `
+            <div class="account-welcome">
+              <div class="mark" style="margin:auto">${currentUser.name.charAt(0).toUpperCase()}</div>
+              <h3>Welcome, ${currentUser.name}</h3>
+              <p>${currentUser.email}<br>${currentUser.phone || "Admin account"}<br>Role: ${currentUser.role}</p>
+              ${isAdmin ? '<button class="btn primary" id="openAdminDashboard" style="margin-bottom:10px;width:100%;">Open Studio Admin</button>' : ''}
+              <button class="btn outline" id="customerLogout">Sign out</button>
+            </div>`;
+
+          if (isAdmin) {
+            document.getElementById("openAdminDashboard").onclick = () => {
+              document.getElementById("accountModal").classList.remove("open");
+              adminDashboard();
+            };
+          }
+
+          document.getElementById("customerLogout").onclick = async () => {
+            await saveUserCart();
+            try {
+              await api("/auth/logout", { method: "POST" });
+            } catch {}
+            clearSession();
+            renderAccount();
+            say("You have been signed out");
+          };
+          return;
+        }
+        showAuth("login");
+      }
+
+      async function openAccount() {
+        document.getElementById("accountModal").classList.add("open");
+        if (authToken && !currentUser) {
+          try {
+            currentUser = (await api("/auth/me")).user;
+            localStorage.setItem("swapna-user", JSON.stringify(currentUser));
+          } catch {
+            clearSession();
+          }
+        }
+        renderAccount();
+      }
+
+      function updateAccountButton() {
+        const button = document.getElementById("account");
+        button.title = currentUser
+          ? `Signed in as ${currentUser.name}`
+          : "Sign in";
+        button.innerHTML = currentUser
+          ? '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.2 3.1-5 7-5s6.2 1.8 7 5"/></svg>'
+          : '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.2 3.1-5 7-5s6.2 1.8 7 5"/></svg>';
+      }
+
+      async function adminDashboard() {
+        if (!currentUser || currentUser.role !== "admin") return openAccount();
+        document.getElementById("modal").classList.add("open");
+
+        const data = await api("/products");
+        const prods = data.products;
+
+        document.getElementById("adminContent").innerHTML = `
+          <div class="admin-grid">
+            <div class="field"><label>Product name</label><input id="newName" placeholder="Lavender coaster set"></div>
+            <div class="field"><label>Category</label>
+              <select id="newCategory">
+                <option>Home decor</option>
+                <option>Jewellery</option>
+                <option>Gifts</option>
+              </select>
+            </div>
+            <div class="field"><label>Price (INR)</label><input id="newPrice" type="number" placeholder="799"></div>
+            <div class="field"><label>Image URL</label><input id="newImage" placeholder="https://..."></div>
+            <div class="field"><label>Description</label><input id="newDesc" placeholder="A tiny handmade treasure"></div>
+            <div class="field"><label>Tag</label><input id="newTag" value="New"></div>
+          </div>
+          <div style="margin-top:10px;">
+            <button class="btn primary" id="addProduct">Add product</button> 
+            <button class="btn outline" id="adminLogout">Sign out</button>
+          </div>
+          
+          <div class="admin-list">
+            <h3 style="margin: 20px 0 10px;">Existing Products</h3>
+            ${prods.map((p) => `
+              <div class="admin-row" id="row-${p.id}">
+                <div class="admin-row-header">
+                  <div class="admin-row-thumb">
+                    <img src="${p.image}" alt="" style="width:48px;height:48px;object-fit:cover;border-radius:4px;">
+                    <div>
+                      <b>${p.name}</b>
+                      <span style="font-size:12px;color:var(--muted);">${p.category} — ₹${p.price}</span>
+                    </div>
+                  </div>
+                  <div class="admin-actions">
+                    <button class="btn primary" style="padding:6px 12px;font-size:11px;" data-saveall="${p.id}">Save</button>
+                    <button class="btn outline" style="padding:6px 12px;font-size:11px;color:var(--coral);" data-del="${p.id}">Delete</button>
+                  </div>
+                </div>
+                <div class="admin-edit-grid">
+                  <input data-edit-name="${p.id}" value="${p.name}" placeholder="Name">
+                  <select data-edit-cat="${p.id}">
+                    <option ${p.category === "Home decor" ? "selected" : ""}>Home decor</option>
+                    <option ${p.category === "Jewellery" ? "selected" : ""}>Jewellery</option>
+                    <option ${p.category === "Gifts" ? "selected" : ""}>Gifts</option>
+                  </select>
+                  <input data-edit-price="${p.id}" type="number" value="${p.price}" placeholder="Price">
+                  <input data-edit-tag="${p.id}" value="${p.tag || ""}" placeholder="Tag">
+                  <input data-edit-img="${p.id}" value="${p.image}" placeholder="Image URL">
+                  <input data-edit-desc="${p.id}" value="${p.desc || ""}" placeholder="Description">
+                </div>
+              </div>
+            `).join("")}
+          </div>`;
+
+        document.getElementById("adminLogout").onclick = async () => {
+          await saveUserCart();
+          try {
+            await api("/auth/logout", { method: "POST" });
+          } catch {}
+          clearSession();
+          document.getElementById("modal").classList.remove("open");
+          showAuth("login");
+        };
+
+        document.getElementById("addProduct").onclick = async () => {
+          try {
+            await api("/admin/products", {
+              method: "POST",
+              body: JSON.stringify({
+                name: document.getElementById("newName").value,
+                category: document.getElementById("newCategory").value,
+                price: document.getElementById("newPrice").value,
+                image: document.getElementById("newImage").value,
+                desc: document.getElementById("newDesc").value,
+                tag: document.getElementById("newTag").value,
+              }),
+            });
+            say("Product added");
+            const updated = await api("/products");
+            products = updated.products;
+            render();
+            adminDashboard();
+          } catch (error) {
+            authMessage(error);
+          }
+        };
+
+        // Save all edited fields for a specific product
+        document.querySelectorAll("[data-saveall]").forEach((button) => {
+          button.onclick = async () => {
+            const id = button.dataset.saveall;
+            const payload = {
+              name: document.querySelector(`[data-edit-name="${id}"]`).value.trim(),
+              category: document.querySelector(`[data-edit-cat="${id}"]`).value,
+              price: Number(document.querySelector(`[data-edit-price="${id}"]`).value),
+              tag: document.querySelector(`[data-edit-tag="${id}"]`).value.trim(),
+              image: document.querySelector(`[data-edit-img="${id}"]`).value.trim(),
+              desc: document.querySelector(`[data-edit-desc="${id}"]`).value.trim(),
+            };
+
+            if (!payload.name || isNaN(payload.price)) {
+              return say("Name and price cannot be empty");
+            }
+
+            try {
+              await api(`/admin/products/${id}`, {
+                method: "PATCH",
+                body: JSON.stringify(payload),
+              });
+              say("Product updated successfully");
+              const updated = await api("/products");
+              products = updated.products;
+              render();
+              adminDashboard();
+            } catch (error) {
+              authMessage(error);
+            }
+          };
+        });
+
+        // Delete product
+        document.querySelectorAll("[data-del]").forEach((button) => {
+          button.onclick = async () => {
+            if (!confirm("Are you sure you want to delete this product?")) return;
+            try {
+              await api(`/admin/products/${button.dataset.del}`, {
+                method: "DELETE",
+              });
+              say("Product removed");
+              const updated = await api("/products");
+              products = updated.products;
+              render();
+              adminDashboard();
+            } catch (error) {
+              authMessage(error);
+            }
+          };
+        });
+      }
+
+      document.getElementById("account").onclick = openAccount;
+      document.getElementById("closeAccount").onclick = () =>
+        document.getElementById("accountModal").classList.remove("open");
+      document.getElementById("closeAdmin").onclick = () =>
+        document.getElementById("modal").classList.remove("open");
+
       async function openOrderForm() {
         if (!entries().length) return say("Add a product to your basket first");
         document.getElementById("orderName").value = currentUser?.name || "";
@@ -1836,9 +1750,11 @@
         }
         document.getElementById("orderModal").classList.add("open");
       }
+      
       document.getElementById("checkout").onclick = openOrderForm;
       document.getElementById("closeOrder").onclick = () =>
         document.getElementById("orderModal").classList.remove("open");
+        
       document.getElementById("confirmOrder").onclick = async () => {
         const fields = [
           "orderName",
@@ -1941,6 +1857,7 @@
         document.getElementById("drawer").classList.remove("open");
         document.getElementById("shade").classList.remove("open");
       };
+      
       if (location.protocol !== "file:") {
         api("/products")
           .then((data) => {
@@ -1953,6 +1870,7 @@
             ),
           );
       }
+      
       updateAccountButton();
       loadUserCart();
     </script>

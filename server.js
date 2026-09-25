@@ -125,7 +125,7 @@ async function body(req) {
   }
 }
 function sendFile(req, res, pathname) {
-  const file = pathname === "/" ? "indexs.html" : pathname.slice(1);
+  const file = pathname === "/" ? "index.html" : pathname.slice(1);
   const safe = path.normalize(file).replace(/^\.\.(?:[\\/]|$)/, "");
   const full = path.join(__dirname, safe);
   if (
