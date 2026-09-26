@@ -933,6 +933,9 @@
         >Questions, custom ideas or order updates? WhatsApp +91 90004
         30210</small
       >
+      <div style="margin-top: 14px;">
+        <button id="footerAdminLink" style="font-size: 11px; color: #aebbb2; text-decoration: underline; background: none; border: 0;">Studio Admin</button>
+      </div>
     </footer>
     <div class="shade" id="shade"></div>
     <aside class="drawer" id="drawer">
@@ -1509,8 +1512,19 @@
       }
       async function renderAccount() {
         if (currentUser) {
+          const adminBtn = currentUser.role === "admin"
+            ? '<button class="btn primary full" id="openAdminBtn" style="margin-bottom: 10px;">Open Studio Admin</button>'
+            : '';
           document.getElementById("accountContent").innerHTML =
-            `<div class="account-welcome"><div class="mark" style="margin:auto">${currentUser.name.charAt(0).toUpperCase()}</div><h3>Welcome, ${currentUser.name}</h3><p>${currentUser.email}<br>${currentUser.phone || "Admin account"}<br>Role: ${currentUser.role}</p><button class="btn outline" id="customerLogout">Sign out</button></div>`;
+            `<div class="account-welcome"><div class="mark" style="margin:auto">${currentUser.name.charAt(0).toUpperCase()}</div><h3>Welcome, ${currentUser.name}</h3><p>${currentUser.email}<br>${currentUser.phone || "Admin account"}<br>Role: ${currentUser.role}</p>${adminBtn}<button class="btn outline full" id="customerLogout">Sign out</button></div>`;
+          
+          if (document.getElementById("openAdminBtn")) {
+            document.getElementById("openAdminBtn").onclick = () => {
+              document.getElementById("accountModal").classList.remove("open");
+              adminDashboard();
+            };
+          }
+
           document.getElementById("customerLogout").onclick = async () => {
             await saveUserCart();
             try {
@@ -1618,6 +1632,9 @@
         document.getElementById("accountModal").classList.remove("open");
       document.getElementById("closeAdmin").onclick = () =>
         document.getElementById("modal").classList.remove("open");
+      document.getElementById("footerAdminLink").onclick = () => {
+        adminDashboard();
+      };
       const baseShowAuth = showAuth;
       showAuth = function (view = "login") {
         baseShowAuth(view);

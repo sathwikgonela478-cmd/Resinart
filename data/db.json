@@ -12,6 +12,19 @@
       "salt": "a854de2f1820497fa75ae510957c3eec",
       "hash": "f48dea633eb26a782bd6b2f2c9a8cd6c32fafa69974fd1f8810d631dacd887d369ee9dc164c0703de37515d23bd69b16b65741cc7f716cbc25f71c36e5999aa0",
       "createdAt": "2026-09-26T01:18:32.441Z"
+    },
+    {
+      "id": "f91f2169-b828-4284-af74-5c43e069021b",
+      "name": "swapna",
+      "email": "swapnagonela3@gmail.com",
+      "phone": "+919000430210",
+      "role": "customer",
+      "cart": {},
+      "profile": {},
+      "orders": [],
+      "salt": "937f59ea80ef397914d925c6e6db892b",
+      "hash": "292410d982e0309270d8545efcff9d24cd081ec60af843ec8c741b0a3320e181a7f25a11a1abdf980c75fd861f9310a53798e88e251b58112e2398cfe7120204",
+      "createdAt": "2026-09-26T01:37:19.303Z"
     }
   ],
   "products": [
