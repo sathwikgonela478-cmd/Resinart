@@ -1,0 +1,55 @@
+{
+  "users": [
+    {
+      "id": "65eac390-aa06-4992-b8a2-5644dc01d5ce",
+      "name": "Swapna Admin",
+      "email": "sathwikgonela478@gmail.com",
+      "phone": "",
+      "role": "admin",
+      "cart": {},
+      "profile": {},
+      "orders": [],
+      "salt": "a854de2f1820497fa75ae510957c3eec",
+      "hash": "f48dea633eb26a782bd6b2f2c9a8cd6c32fafa69974fd1f8810d631dacd887d369ee9dc164c0703de37515d23bd69b16b65741cc7f716cbc25f71c36e5999aa0",
+      "createdAt": "2026-09-26T01:18:32.441Z"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Ocean Wave Coaster Set",
+      "category": "Home decor",
+      "price": 899,
+      "tag": "Bestseller",
+      "desc": "Four coasters with a soft blue wave and gold edge.",
+      "image": "https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=700&q=85"
+    },
+    {
+      "id": 2,
+      "name": "Sunset Trinket Tray",
+      "category": "Home decor",
+      "price": 749,
+      "tag": "New",
+      "desc": "A little tray for rings, keys and beautiful bits.",
+      "image": "https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=700&q=85"
+    },
+    {
+      "id": 3,
+      "name": "Petal Drop Earrings",
+      "category": "Jewellery",
+      "price": 499,
+      "tag": "Handmade",
+      "desc": "Light-catching floral drops for your everyday.",
+      "image": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=700&q=85"
+    },
+    {
+      "id": 4,
+      "name": "Moonlit Blue Bookmark",
+      "category": "Gifts",
+      "price": 299,
+      "tag": "Gift idea",
+      "desc": "A thoughtful little gift for the reader in your life.",
+      "image": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=700&q=85"
+    }
+  ]
+}
