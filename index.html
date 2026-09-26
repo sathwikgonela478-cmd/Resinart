@@ -1381,9 +1381,9 @@
     </script>
     <script>
       const API =
-        location.protocol === "file:" || location.port === "5500"
-          ? "http://localhost:3000/api"
-          : "/api";
+  location.hostname === "localhost" || location.protocol === "file:" || location.port === "5500"
+    ? "http://localhost:3000/api"
+    : "https://swapnas-resinart-api.onrender.com/api";
       let authToken = localStorage.getItem("swapna-token") || "",
         currentUser = JSON.parse(localStorage.getItem("swapna-user") || "null");
       async function api(path, options = {}) {
